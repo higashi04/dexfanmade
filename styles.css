@@ -1,0 +1,18 @@
+:root{
+    --mainColor:  #060232;
+    --mainText: #E91E07;
+}
+
+body {
+    background-color: var(--mainColor);
+    font-family: 'Fjalla One', sans-serif;
+    color: var(--mainText);
+}
+.navbar {
+    background-color: var(--mainColor);
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
