@@ -36,8 +36,10 @@ form.addEventListener('submit', async function getPokemon(e) {
                     if (dexSelector.value !== currentDexEtntry){
                        removeElements();
                     }
-                    console.log(response.data.abilities[0].ability.name);
-                    console.log(response.data.abilities[1].ability.name);
+                    const abRes = response.data.abilities
+                    console.log(response.data.abilities)
+                    console.log(abRes[0].ability.name);
+                    //console.log(response.data.abilities[1].ability.name);
                     pokeName.innerText = `Name: ${response.data.name}`;
                     pokeAbility.innerText = `Ability: ${response.data.abilities[0].ability.name}`;
                     pokeImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexSelector.value}.png`
