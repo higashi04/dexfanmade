@@ -20,16 +20,16 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+              <li class="nav-item btn-outline-light">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item btn-outline-light">
                 <a class="nav-link" href="https://www.serebii.net/index2.shtml">Serebii</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item btn-outline-light">
                 <a class="nav-link" href="https://bulbapedia.bulbagarden.net/wiki/Main_Page">Bulbapedia</a>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown btn-outline-light">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Contact Me
                 </a>
@@ -59,20 +59,24 @@
         <h1>A Fan Made Pokedex</h1>
       </div>
       <div class="container">
-        <form action="" method="get">
-            <span>Choose your pokedex entry</span>
-            <select class="form-select dexNumber" aria-label="selector">
-                <option selected>0</option>
-                
+        <form id="form" action="" method="get">
+           <div class="form">
+             <span>Choose your pokedex entry</span>
+              <select class="form-select dexNumber" aria-label="selector">
+                <option selected>Select a number</option> 
               </select>
+              <br>
+              <button class="btn btn-outline-dark centerButton" type="submit">Submit</button>
+            </div>
         </form>
       </div>
       <div class="container">
-        <div class="child">
-            <img src="./Pokeball-1.gif" alt="" srcset="">
+        <div class="child dexDisplay">
+            
         </div>
       </div>
     <script src="./app.js"></script>
     <script src="./bootstrap.bundle.min.js"></script>
+    <script src="./axios.min.js"></script>
 </body>
 </html>

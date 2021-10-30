@@ -1,5 +1,5 @@
 :root{
-    --mainColor:  #060232;
+    --mainColor:  #020111;
     --mainText: #E91E07;
 }
 
@@ -15,4 +15,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
 }
