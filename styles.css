@@ -1,6 +1,7 @@
 :root{
-    --mainColor:  #020111;
-    --mainText: #E91E07;
+    --mainColor:  #ACC8E5;
+    --mainText: #112A46;
+    --linksText: #D4E554;
 }
 
 body {
@@ -9,7 +10,7 @@ body {
     color: var(--mainText);
 }
 .navbar {
-    background-color: var(--mainColor);
+    background-color: var(--mainText);
 }
 .container {
     display: flex;
@@ -26,6 +27,10 @@ body {
 div {
     margin: 5px;
 }
+.pokeImage {
+    width: 200px;
+}
 .dexDisplay {
-    margin: 15vh;
+    margin: 5vh;
+    font-size: 1.5rem;
 }

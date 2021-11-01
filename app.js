@@ -9,16 +9,24 @@ for (let i = 1; i < 899; i++) {
     optionNumber.text = i;
     dexSelector.appendChild(optionNumber);
 };
+
 const pokeName = document.createElement('div');
-const pokeAbility = document.createElement('div');
 const pokeImage = document.createElement('img');
+const hiddenAb = document.createElement('div');
 const pokeball = document.createElement('img');
 pokeball.src = "Pokeball-1.gif";
+const pokeAbility = document.createElement('div')
 function removeElements() {
     dexDisplay.removeChild(pokeName);
     dexDisplay.removeChild(pokeImage);
-    dexDisplay.removeChild(pokeAbility);
+    pokeAbility.innerText = " ";
 }
+for (let i = 1; i < 899; i++) {
+    const optionNumber = document.createElement('option');
+    optionNumber.value = i;
+    optionNumber.text = i;
+    dexSelector.appendChild(optionNumber);
+};
 
 form.addEventListener('submit', async function getPokemon(e) {
     e.preventDefault();
@@ -32,23 +40,28 @@ form.addEventListener('submit', async function getPokemon(e) {
                     if(child === true){
                         dexDisplay.removeChild(pokeball);
                     }
-                    let currentDexEtntry = dexSelector.value;
-                    if (dexSelector.value !== currentDexEtntry){
+                    if (child === false){
                        removeElements();
                     }
+                    
                     const abRes = response.data.abilities
-                    console.log(response.data.abilities)
-                    console.log(abRes[0].ability.name);
-                    //console.log(response.data.abilities[1].ability.name);
+                    console.log(abRes)
                     pokeName.innerText = `Name: ${response.data.name}`;
-                    pokeAbility.innerText = `Ability: ${response.data.abilities[0].ability.name}`;
                     pokeImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexSelector.value}.png`
+                    pokeImage.className = 'pokeImage'
                     dexDisplay.appendChild(pokeName);
-                    dexDisplay.appendChild(pokeAbility);
                     dexDisplay.appendChild(pokeImage);
                     child = false;
-                    console.log(child);
-
+                    for (i=0; i< abRes.length; i++){
+                        const ability = document.createElement('div')
+                        ability.innerText = `Ability: ${abRes[i].ability.name}`
+                        pokeAbility.appendChild(ability)
+                        if(abRes[i].is_hidden === true){
+                            hiddenAb.innerText = 'hidden ability'
+                            ability.appendChild(hiddenAb);
+                        }
+                        dexDisplay.appendChild(pokeAbility)
+                    }
             } catch (error) {
                 console.error(error);
   }
