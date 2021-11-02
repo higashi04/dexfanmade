@@ -1,13 +1,15 @@
 :root{
     --mainColor:  #ACC8E5;
     --mainText: #112A46;
-    --linksText: #D4E554;
 }
 
 body {
     background-color: var(--mainColor);
     font-family: 'Fjalla One', sans-serif;
     color: var(--mainText);
+}
+button{
+    cursor: pointer;
 }
 .navbar {
     background-color: var(--mainText);
@@ -29,8 +31,22 @@ div {
 }
 .pokeImage {
     width: 200px;
+    border-color: black 2px;
+}
+.container-grid{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
 .dexDisplay {
     margin: 5vh;
     font-size: 1.5rem;
+    grid-column: span 2;
+}
+.dexDisplayTwo {
+    margin: 5vh;
+    font-size: 1.5rem;
+    grid-column: span 2;
 }

@@ -1,4 +1,5 @@
 const dexSelector = document.querySelector('.dexNumber');
+const dexDisplayTwo = document.querySelector('.dexDisplayTwo')
 const dexDisplay = document.querySelector('.dexDisplay');
 const form = document.querySelector('#form');
 let child = true;
@@ -14,12 +15,20 @@ const pokeName = document.createElement('div');
 const pokeImage = document.createElement('img');
 const hiddenAb = document.createElement('div');
 const pokeball = document.createElement('img');
+const typeBox = document.createElement('div');
+const typing = document.createElement('ul');
+const statsUl = document.createElement('ul');
+const statsUlBox = document.createElement('div');
 pokeball.src = "Pokeball-1.gif";
 const pokeAbility = document.createElement('div')
 function removeElements() {
     dexDisplay.removeChild(pokeName);
     dexDisplay.removeChild(pokeImage);
+    typeBox.innerText = " ";
+    typing.innerHTML = " ";
     pokeAbility.innerText = " ";
+    statsUlBox.innerText = " ";
+    statsUl.innerHTML = " ";
 }
 for (let i = 1; i < 899; i++) {
     const optionNumber = document.createElement('option');
@@ -43,9 +52,10 @@ form.addEventListener('submit', async function getPokemon(e) {
                     if (child === false){
                        removeElements();
                     }
-                    
-                    const abRes = response.data.abilities
-                    console.log(abRes)
+                    console.log(response)
+                    const abRes = response.data.abilities;
+                    const types = response.data.types;
+                    const statName = response.data.stats;
                     pokeName.innerText = `Name: ${response.data.name}`;
                     pokeImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexSelector.value}.png`
                     pokeImage.className = 'pokeImage'
@@ -62,6 +72,26 @@ form.addEventListener('submit', async function getPokemon(e) {
                         }
                         dexDisplay.appendChild(pokeAbility)
                     }
+                    for (i=0; i<types.length; i++){
+                        const type = document.createElement('li');
+                        type.innerText = types[i].type.name;
+                        typing.appendChild(type);
+                    }
+                    typeBox.innerText = 'Type(s): ';
+                    typeBox.appendChild(typing);
+                    dexDisplayTwo.appendChild(typeBox);
+                    for(i=0;i<statName.length;i++){
+                        const statNameLi = document.createElement('li');
+                        const statsValue = document.createElement('span');
+                        statsValue.innerText = ` ${statName[i].base_stat}`
+                        statNameLi.innerText = statName[i].stat.name;
+                        statNameLi.appendChild(statsValue);
+                        statsUl.appendChild(statNameLi);
+                    }
+                    statsUlBox.innerText = "Stats: "
+                    statsUlBox.appendChild(statsUl);
+                    dexDisplayTwo.appendChild(statsUlBox);
+
             } catch (error) {
                 console.error(error);
   }
@@ -70,7 +100,6 @@ form.addEventListener('submit', async function getPokemon(e) {
 if (dexSelector.value  === 'Select a number') {
     dexDisplay.appendChild(pokeball);
     child = true;
-    console.log(child)
 } else { 
     getPokemon();
 }
