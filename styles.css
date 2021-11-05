@@ -33,19 +33,20 @@ div {
     width: 200px;
 }
 .container-grid{
+    width: clamp(200px, 50%, 600px);
     display: grid;
     justify-content: center;
     align-content: center;
-    grid-template-columns: repeat(6, 100px);
+    grid-template-columns: repeat(4, 100px);
     grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
 .dexDisplay {
     margin: 5vh;
     font-size: 1.5rem;
-    grid-column: span 3;
+    grid-column: span 2;
 }
 .dexDisplayTwo {
     margin: 5vh;
     font-size: 1.5rem;
-    grid-column: span 3;
+    grid-column: span 2;
 }
