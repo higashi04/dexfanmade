@@ -1,6 +1,7 @@
 const dexSelector = document.querySelector('.dexNumber');
 const dexDisplayTwo = document.querySelector('.dexDisplayTwo')
 const dexDisplay = document.querySelector('.dexDisplay');
+const dexDisplayThree = document.querySelector('.dexDisplayThree');
 const form = document.querySelector('#form');
 let child = true;
 
@@ -19,11 +20,14 @@ const typeBox = document.createElement('div');
 const typing = document.createElement('ul');
 const statsUl = document.createElement('ul');
 const statsUlBox = document.createElement('div');
+const locationList = document.createElement('ol')
 pokeball.src = "Pokeball-1.gif";
 const pokeAbility = document.createElement('ol')
 function removeElements() {
     dexDisplay.removeChild(pokeName);
     dexDisplay.removeChild(pokeImage);
+    locationList.innerHTML= " ";
+    dexDisplayThree.innerHTML = " ";
     typeBox.innerText = " ";
     typing.innerHTML = " ";
     pokeAbility.innerText = " ";
@@ -84,6 +88,25 @@ function statsResponse(response){
     statsUlBox.appendChild(statsUl);
     dexDisplayTwo.appendChild(statsUlBox);
 }
+function locationArea(responseTwo) {
+    const location = responseTwo.data
+    
+    const locationTitle = document.createElement('h2');
+    locationTitle.innerText = "Locations: "
+    if(location[0] !== undefined){
+        for (i=0;i<location.length;i++){
+            const locationElement = document.createElement('li')
+            locationElement.innerText = location[i].location_area.name
+            locationList.appendChild(locationElement);
+        } 
+    } else {
+        const noLocation = document.createElement('li');
+        noLocation.innerText = "This pokemon is not found on the wild"
+        locationList.appendChild(noLocation)
+    }
+    dexDisplayThree.appendChild(locationTitle);
+    dexDisplayThree.appendChild(locationList);
+}
 form.addEventListener('submit', async function getPokemon(e) {
     e.preventDefault();
     if (dexSelector.value  === 'Select a number') {
@@ -93,18 +116,21 @@ form.addEventListener('submit', async function getPokemon(e) {
     } else {
         try {
                 const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${dexSelector.value}/`);
+                const responseTwo = await axios.get(`https://pokeapi.co/api/v2/pokemon/${dexSelector.value}/encounters`);
                     if(child === true){
                         dexDisplay.removeChild(pokeball);
                     }
                     if (child === false){
                        removeElements();
                     }
-                    console.log(response)
+                    //console.log(responseTwo)
+                    //console.log(responseTwo.data[0].location_area.name)
                     nameH2(response);
                     imgDisplay();
                     abilitiesResponse(response);
                     typesRes(response);
                     statsResponse(response);
+                    locationArea(responseTwo);
                     child = false;
             } catch (error) {
                 console.error(error);
